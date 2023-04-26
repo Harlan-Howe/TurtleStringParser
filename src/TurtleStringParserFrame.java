@@ -45,6 +45,10 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         setVisible(true);
     }
 
+    /**
+     * Creates the controls for the North panel of the window, altering the general appearance of the turtle and path.
+     * @return The panel that is ready to add to the North.
+     */
     public JPanel buildControlGUI()
     {
         JPanel controlPanel = new JPanel();
@@ -73,6 +77,12 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         return controlPanel;
     }
 
+    /**
+     * Creates the panel for the south side of the window, this is going to show the string that the turtle is being
+     * given to follow, which may vary from the source string from the replacements. Consists of a text area in a scroll
+     * pane, in case there is extra text that doesn't fit onscreen.
+     * @return - a panel ready to add to the South.
+     */
     public JPanel buildOutputGUI()
     {
         JPanel outputPanel = new JPanel();
@@ -84,6 +94,11 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         return outputPanel;
     }
 
+    /**
+     * creates the panel for the east side of the window. This has the controls for the shape of the path, along with
+     * the "Go" button.
+     * @return A panel that is ready to add to the East.
+     */
     public JPanel buildInputGUI()
     {
         JPanel inputPanel = new JPanel();
@@ -126,6 +141,11 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     }
 
     @Override
+    /**
+     * required if we are implementing the ActionListener interface (see line 11). This method will get called if the
+     * Go button or the turtle toggle button are pressed. (They are told to do this with the "addActionListener(this)"
+     * command... look up about 12 lines for an example.)
+     */
     public void actionPerformed(ActionEvent actEvt)
     {
         if (actEvt.getSource() == goButton)
@@ -138,6 +158,10 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         }
     }
 
+    /**
+     * The user pressed the Go button, and we've been routed to this method to respond. Takes the source string and
+     * performs a replacement cycle N times, before sending the resulting string to the output text area and the turtle.
+     */
     private void respondToGoButton()
     {
         String source = sourceTF.getText();
@@ -156,6 +180,10 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     }
 
     @Override
+    /**
+     * required if we are implementing the ChangeListener interface (see line 11). This method will be called if the
+     * user makes a change to the distance slider at the top of the window.
+     */
     public void stateChanged(ChangeEvent chgEvt)
     {
         if (chgEvt.getSource() == distanceSlider)
@@ -170,6 +198,10 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
 
 
     @Override
+    /**
+     * required if we are implementing the PropertyChangeListener interface (see line 11). This method will be called
+     * if the user selects a new color in one of the color buttons.
+     */
     public void propertyChange(PropertyChangeEvent evt)
     {
         if (evt.getSource()==lineColorChooserButton && (((String)evt.getPropertyName()).equals("myColor")))
