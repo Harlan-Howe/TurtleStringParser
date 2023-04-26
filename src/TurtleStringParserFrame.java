@@ -5,13 +5,16 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class TurtleStringParserFrame extends JFrame implements ActionListener, ChangeListener
+public class TurtleStringParserFrame extends JFrame implements ActionListener, ChangeListener, PropertyChangeListener
 {
     private TurtlePanel turtle;
     private JSlider distanceSlider;
     private JLabel distanceLabel;
     private JCheckBox visibleTurtleToggle;
+    private ColorChooserButton lineColorChooserButton, turtleColorChooserButton;
 
     private JTextArea outputTextArea;
 
@@ -19,12 +22,16 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     private JSpinner iterationSpinner;
     private JButton goButton;
 
+    private StringConvolver myConvolver;
+
     public TurtleStringParserFrame()
     {
         super("Turtles all the way down.");
         setSize(1000,800);
         this.getContentPane().setLayout(new BorderLayout());
         turtle = new TurtlePanel();
+        myConvolver = new StringConvolver();
+
         JPanel controlPanel = buildControlGUI();
         JPanel outputPanel = buildOutputGUI();
         JPanel inputPanel = buildInputGUI();
@@ -47,11 +54,21 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         visibleTurtleToggle = new JCheckBox("Visible Turtle");
         visibleTurtleToggle.setSelected(true);
         visibleTurtleToggle.addActionListener(this);
+        lineColorChooserButton = new ColorChooserButton("temp",Color.PINK);
+        lineColorChooserButton.addPropertyChangeListener(this);
+        turtleColorChooserButton = new ColorChooserButton("temp",Color.GREEN);
+        turtleColorChooserButton.addPropertyChangeListener(this);
+
         controlPanel.setLayout(new FlowLayout());
         controlPanel.add(new JLabel("Distance"));
         controlPanel.add(distanceSlider);
         controlPanel.add(distanceLabel);
         controlPanel.add(visibleTurtleToggle);
+        controlPanel.add(new JLabel("Line:"));
+        controlPanel.add(lineColorChooserButton);
+        controlPanel.add(new JLabel("Turtle:"));
+        controlPanel.add(turtleColorChooserButton);
+
         return controlPanel;
     }
 
@@ -89,7 +106,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
 
         Box iterationRow = Box.createHorizontalBox();
         iterationSpinner = new JSpinner(new SpinnerNumberModel(0,0,8,1)); // start, min, max, stepsize
-        iterationRow.add(new JLabel("Number of cycles:"));
+        iterationRow.add(new JLabel("Number of replacement cycles:"));
         iterationRow.add(iterationSpinner);
         iterationRow.add(Box.createHorizontalGlue());
         verticalStack.add(iterationRow);
@@ -111,13 +128,29 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     {
         if (actEvt.getSource() == goButton)
         {
-            System.out.println("Go button pressed.");
+            respondToGoButton();
         }
         if (actEvt.getSource() == visibleTurtleToggle)
         {
             turtle.setTurtleIsVisible(visibleTurtleToggle.isSelected());
-            turtle.repaint();
         }
+    }
+
+    private void respondToGoButton()
+    {
+        String source = sourceTF.getText();
+        String stringToFind = replace1TF.getText();
+        String stringToReplaceWith = with1TF.getText();
+        int N = (int) iterationSpinner.getValue();
+
+        myConvolver.setSourceString(source);
+        myConvolver.setReplace1(stringToFind);
+        myConvolver.setWith1(stringToReplaceWith);
+
+        String instructions = myConvolver.convolveStringNTimes(N);
+
+        turtle.setInstructions(instructions);
+        outputTextArea.setText(instructions);
     }
 
     @Override
@@ -127,7 +160,23 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         {
             turtle.setDistance(distanceSlider.getValue());
             distanceLabel.setText(""+distanceSlider.getValue());
-            turtle.repaint();
+
+        }
+        else
+            System.out.println(chgEvt);
+    }
+
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getSource()==lineColorChooserButton && (((String)evt.getPropertyName()).equals("myColor")))
+        {
+            turtle.setLineColor((Color)evt.getNewValue());
+        }
+        if (evt.getSource()==turtleColorChooserButton && (((String)evt.getPropertyName()).equals("myColor")))
+        {
+            turtle.setTurtleColor((Color)evt.getNewValue());
         }
     }
 }

@@ -21,7 +21,7 @@ public class TurtlePanel extends JPanel
     {
         super();
         distance = 30;
-        instructions = "FfFRFLFLFffLFLFLFLFffFRFRFRF";
+        instructions = "";
         turtleIsVisible = true;
         lineColor = Color.PINK;
         turtleColor = Color.GREEN;
@@ -88,12 +88,34 @@ public class TurtlePanel extends JPanel
         }
     }
 
-    public void setTurtleIsVisible(boolean b) {turtleIsVisible = b;}
+    public void setTurtleIsVisible(boolean b)
+    {
+        turtleIsVisible = b;
+        repaint();
+    }
 
     public void setDistance(int d)
     {
         distance = d;
         turtleSize = 2*distance/3;
+        repaint();
     }
 
+    public void setInstructions(String inst)
+    {
+        instructions = inst;
+        repaint();
+    }
+
+    public void setLineColor(Color lineColor)
+    {
+        this.lineColor = lineColor;
+        repaint();
+    }
+
+    public void setTurtleColor(Color turtleColor)
+    {
+        this.turtleColor = turtleColor;
+        repaint();
+    }
 }
