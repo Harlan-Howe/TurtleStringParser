@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * a custom JPanel that holds a turtle that will draw a shape based on the commands in "instructions."
+ */
 public class TurtlePanel extends JPanel
 {
     private int distance;
@@ -26,13 +29,14 @@ public class TurtlePanel extends JPanel
         lineColor = Color.PINK;
         turtleColor = Color.GREEN;
         turtleSize = 20;
+        setBackground(Color.BLACK);
+
     }
 
 
     @Override
     public void paintComponent(Graphics g)
     {
-        setBackground(Color.BLACK);
         super.paintComponent(g);
         int xLoc = getWidth()/2;
         int yLoc = getHeight()/2;
