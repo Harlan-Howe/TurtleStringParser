@@ -3,6 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This is a custom class that creates a button that contains a color... clicking the button presents a dialog with a
+ * color chooser. If the user clicks ok in that dialog, updates the color and fires a PropertyChange event.
+ */
 public class ColorChooserButton extends JButton implements ActionListener
 {
     private Color myColor;
@@ -23,6 +27,10 @@ public class ColorChooserButton extends JButton implements ActionListener
     }
 
     @Override
+    /**
+     * required as we are implementing the ActionListener interface (see line 10). This will be called if the user
+     * clicks this button. It is activated on line 19 with the "addActionListener(this)" command.
+     */
     public void actionPerformed(ActionEvent e)
     {
         JColorChooser chooser = new JColorChooser(myColor);
