@@ -64,11 +64,12 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         controlPanel.add(distanceSlider);
         controlPanel.add(distanceLabel);
         controlPanel.add(visibleTurtleToggle);
-        controlPanel.add(new JLabel("Line:"));
-        controlPanel.add(lineColorChooserButton);
-        controlPanel.add(new JLabel("Turtle:"));
-        controlPanel.add(turtleColorChooserButton);
-
+        JPanel colorPanel = new JPanel(new GridLayout(2,2));
+        colorPanel.add(new JLabel("Line:",JLabel.RIGHT));
+        colorPanel.add(lineColorChooserButton);
+        colorPanel.add(new JLabel("Turtle:", JLabel.RIGHT));
+        colorPanel.add(turtleColorChooserButton);
+        controlPanel.add(colorPanel);
         return controlPanel;
     }
 
@@ -87,6 +88,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     {
         JPanel inputPanel = new JPanel();
         sourceTF = new JTextField(30);
+        sourceTF.setText("Lffff RFFRFRFRFLLfRFLf LFFRFRFRFLfLff fRRFRFFRFf fLLFLFLFRFRF");
         sourceTF.setToolTipText("Enter the text that will be used as the basis of the turtle's instructions.");
         sourceTF.setBorder(new TitledBorder("Source string"));
 
