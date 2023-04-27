@@ -19,7 +19,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     private JTextArea outputTextArea;
 
     private JTextField sourceTF;
-    private JTextField find1TextField, replace1TextField; // TODO (optional): make more.
+    private JTextField find1TextField, replace1TextField; // TODO (for optional multi-search): make more.
     private JSpinner iterationSpinner;
     private JButton goButton;
 
@@ -113,6 +113,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         verticalStack.add(sourceTF);
         verticalStack.add(Box.createVerticalStrut(30));
 
+        // TODO (for optional multi-search): Repeat the following row construction.
         Box findReplace1Row = Box.createHorizontalBox();
         find1TextField = new JTextField(10);
         find1TextField.setBorder(new TitledBorder("Find"));
@@ -139,6 +140,10 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
 
         verticalStack.add(Box.createVerticalGlue());
         inputPanel.add(verticalStack);
+
+        // extension idea: perhaps create controls to let the user pick the starting location (x, y) of the turtle.
+
+
         return inputPanel;
     }
 
@@ -167,11 +172,14 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     private void respondToGoButton()
     {
         String source = sourceTF.getText();
+        // TODO: (for optional multi-search): repeat the next two lines.
         String stringToFind = find1TextField.getText();
         String stringToReplaceWith = replace1TextField.getText();
+
         int N = (int) iterationSpinner.getValue();
 
         myConvolver.setSourceString(source);
+        // TODO: (for optional multi-search): repeat the next two lines.
         myConvolver.setFind1(stringToFind);
         myConvolver.setReplace1(stringToReplaceWith);
 
