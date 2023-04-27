@@ -18,7 +18,7 @@ public class StringConvolver
     }
 
     /**
-     * replaces all occurances of the "find1" string found in "sourceString" with "replace1" string. Do this N times.
+     * replaces all occurrences of the "find1" string found in "sourceString" with "replace1" string. Do this N times.
      * NOTE: if find1 is an empty string, return the source string.
      *
      * Level 1: one character --> one character
@@ -39,11 +39,12 @@ public class StringConvolver
      * convolveStringNTimes(3) --> "plhhhandymandymhandymandymhhandymandymhandymant"
      *
      * Level 4: multiple replace-with pairs
-     * Note: this will require creating new variables and modifiers.
+     * Note: this will require creating new variables and modifiers in this class and new GUI elements in the frame.
      * Don't do find1/replace1 if find1 is "". Don't do find2/replace2 if find2 is "".
      * If sourceString is "happy", find1 is "ha" and replace1 is "sna", and find2 is "py" and replace2 is "per"
      * convolveStringNTimes(0) --> "happy"
      * convolveStringNTimes(1) --> "snapper"
+     *
      * @param N - the number of times you should loop through this string doing a replacement pass
      * @return - a string generated from the source string with the find-replace cycle completed N times.
      */
@@ -51,14 +52,15 @@ public class StringConvolver
     {
         StringBuilder builder = new StringBuilder(sourceString);
 
-        int find1Length = 0;
-        if (find1 != null)
-            find1Length = find1.length();
-        for (int i=0; i<N; i++)
+        int find1Length = find1.length();
+        for (int i=0; i<N; i++) // do N cycles.
         {
             String tempSource = builder.toString();
             int tempSourceLength = tempSource.length();
-            builder = new StringBuilder();
+            builder = new StringBuilder();  // you'll use bulder.append(___) to add strings or chars to this string.
+            // --------------------------------------------------------------------------------------------------------
+            // TODO #1: loop through tempSource string and at each point, identify whether you have a match for find1.
+            //          If so, add replace to the builder; if not, add the character in tempSource at this location.
             for (int j=0; j<tempSourceLength; j++)
             {
                 if (find1Length > 0 && j+find1Length<tempSourceLength+1)
@@ -81,10 +83,11 @@ public class StringConvolver
                 else
                     builder.append(tempSource.charAt(j));
             }
+            // --------------------------------------------------------------------------------------------------------
 
         }
 
-        return builder.toString(); // temporary code. Replace this. Otherwise, this behaves like it is always N=0.
+        return builder.toString();
     }
 
 
