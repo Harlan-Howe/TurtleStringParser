@@ -6,6 +6,7 @@ import java.awt.*;
  */
 public class TurtlePanel extends JPanel
 {
+    private int xLoc, yLoc, heading;
     private int distance;
     private String instructions;
     private boolean turtleIsVisible;
@@ -38,10 +39,16 @@ public class TurtlePanel extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        int xLoc = getWidth()/2;
-        int yLoc = getHeight()/2;
-        int heading = NORTH;
+        xLoc = getWidth()/2;
+        yLoc = getHeight()/2;
+        heading = NORTH;
 
+        //TODO #0: loop through all the characters in the "instructions" variable.
+        //       Every time you encounter 'L' or 'l', turnLeft();
+        //       Every time you encounter 'R' or 'r', turnRight();
+        //       Every time you encounter 'f', skipForward();
+        //       Every time you encounter 'F', lineForward();
+        //       Every time you encounter some other character, do nothing -- go on to the next character.
         for(int i=0; i<instructions.length(); i++)
         {
             char c = instructions.charAt(i);
@@ -49,23 +56,17 @@ public class TurtlePanel extends JPanel
             {
                 case 'l':
                 case 'L':
-                    heading = (heading+3)%4;
+                    turnLeft();
                     break;
                 case 'r':
                 case 'R':
-                    heading = (heading +1)%4;
+                    turnRight();
                     break;
                 case 'f':
-                    xLoc += distance * deltas[heading][0];
-                    yLoc += distance * deltas[heading][1];
+                    skipForward();
                     break;
                 case 'F':
-                    int newX = xLoc + distance * deltas[heading][0];
-                    int newY = yLoc + distance * deltas[heading][1];
-                    g.setColor(lineColor);
-                    g.drawLine(xLoc, yLoc, newX, newY);
-                    xLoc = newX;
-                    yLoc = newY;
+                    lineForward(g);
                     break;
             }
         }
@@ -90,6 +91,46 @@ public class TurtlePanel extends JPanel
                                 footSize);
                 }
         }
+    }
+
+    /**
+     * moves the turtle forward by "distance" in its current heading, drawing a line from where it just was to its new
+     * location.
+     * @param g - the graphics context.
+     */
+    private void lineForward(Graphics g)
+    {
+        int newX = xLoc + distance * deltas[heading][0];
+        int newY = yLoc + distance * deltas[heading][1];
+        g.setColor(lineColor);
+        g.drawLine(xLoc, yLoc, newX, newY);
+        xLoc = newX;
+        yLoc = newY;
+    }
+
+    /**
+     * moves the turtle forward by "distance" in its current heading, without drawing a line.
+     */
+    private void skipForward()
+    {
+        xLoc += distance * deltas[heading][0];
+        yLoc += distance * deltas[heading][1];
+    }
+
+    /**
+     * turns the turtle 90° clockwise
+     */
+    private void turnRight()
+    {
+        heading = (heading +1)%4;
+    }
+
+    /**
+     * turns the turtle 90° counterclockwise.
+     */
+    private void turnLeft()
+    {
+        heading = (heading+3)%4;
     }
 
     public void setTurtleIsVisible(boolean b)
