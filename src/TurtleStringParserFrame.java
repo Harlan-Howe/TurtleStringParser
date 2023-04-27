@@ -18,7 +18,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
 
     private JTextArea outputTextArea;
 
-    private JTextField sourceTF, replace1TF, with1TF;
+    private JTextField sourceTF, find1TextField, replace1TextField;
     private JSpinner iterationSpinner;
     private JButton goButton;
 
@@ -111,14 +111,14 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         verticalStack.add(sourceTF);
         verticalStack.add(Box.createVerticalStrut(30));
 
-        Box replace1Row = Box.createHorizontalBox();
-        replace1TF = new JTextField(10);
-        replace1TF.setBorder(new TitledBorder("Replace"));
-        with1TF = new JTextField(10);
-        with1TF.setBorder(new TitledBorder("With"));
-        replace1Row.add(replace1TF);
-        replace1Row.add(with1TF);
-        verticalStack.add(replace1Row);
+        Box findReplace1Row = Box.createHorizontalBox();
+        find1TextField = new JTextField(10);
+        find1TextField.setBorder(new TitledBorder("Find"));
+        replace1TextField = new JTextField(10);
+        replace1TextField.setBorder(new TitledBorder("Replace"));
+        findReplace1Row.add(find1TextField);
+        findReplace1Row.add(replace1TextField);
+        verticalStack.add(findReplace1Row);
         verticalStack.add(Box.createVerticalStrut(30));
 
         Box iterationRow = Box.createHorizontalBox();
@@ -165,8 +165,8 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     private void respondToGoButton()
     {
         String source = sourceTF.getText();
-        String stringToFind = replace1TF.getText();
-        String stringToReplaceWith = with1TF.getText();
+        String stringToFind = find1TextField.getText();
+        String stringToReplaceWith = replace1TextField.getText();
         int N = (int) iterationSpinner.getValue();
 
         myConvolver.setSourceString(source);
