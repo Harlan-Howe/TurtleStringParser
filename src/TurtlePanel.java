@@ -49,6 +49,13 @@ public class TurtlePanel extends JPanel
         //       Every time you encounter 'f', skipForward();
         //       Every time you encounter 'F', lineForward();
         //       Every time you encounter some other character, do nothing -- go on to the next character.
+
+        // Potential extension... when encountering a numerical digit, change colors.
+        //                        (e.g., '1' = red, '2' = green, etc.)
+        // Potential extension... allow comments, perhaps by letting backslash mean "ignore the next character"
+        //                        or the hashtag mean "ignore all text until the next hashtag."
+        //                        (Yes, comments already work, as long as you don't use L, R, or F in your comment.)
+
         for(int i=0; i<instructions.length(); i++)
         {
             char c = instructions.charAt(i);
