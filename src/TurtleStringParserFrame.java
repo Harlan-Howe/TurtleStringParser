@@ -87,7 +87,8 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     {
         JPanel outputPanel = new JPanel();
         outputTextArea = new JTextArea("Nothing yet",4,60);
-        outputTextArea.setEnabled(false);
+        outputTextArea.setLineWrap(true);
+        outputTextArea.setEnabled(true);
         JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
         outputPanel.add(outputScrollPane);
         outputPanel.setPreferredSize(new Dimension(-1, 75));
@@ -171,7 +172,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
 
         myConvolver.setSourceString(source);
         myConvolver.setFind1(stringToFind);
-        myConvolver.setFind1(stringToReplaceWith);
+        myConvolver.setReplace1(stringToReplaceWith);
 
         String instructions = myConvolver.convolveStringNTimes(N);
 
