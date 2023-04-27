@@ -1,10 +1,15 @@
 public class StringConvolver
 {
-    private String sourceString, replace1, with1;
+    private String sourceString, find1, replace1;
 
     public void setSourceString(String sourceString)
     {
         this.sourceString = sourceString;
+    }
+
+    public void setFind1(String find1)
+    {
+        this.find1 = find1;
     }
 
     public void setReplace1(String replace1)
@@ -12,44 +17,42 @@ public class StringConvolver
         this.replace1 = replace1;
     }
 
-    public void setWith1(String with1)
-    {
-        this.with1 = with1;
-    }
-
     /**
-     * replaces all occurances of the "replace1" string found in "sourceString" with "with1" string. Do this N times.
+     * replaces all occurances of the "find1" string found in "sourceString" with "replace1" string. Do this N times.
+     * NOTE: if find1 is an empty string, return the source string.
      *
      * Level 1: one character --> one character
-     * For example, if sourceString is "bottom", replace1 is "o" and with1 is "i", then
+     * For example, if sourceString is "bottom", find1 is "o" and replace1 is "i", then
      * convolveStringNTimes(0) --> "bottom"
      * convolveStringNTimes(1) --> "bittim"
      *
      * Level 2: one character --> multi characters
-     * If sourceString is "I was washing my watermellon", replace1 is "w" and with1 is "two", then
-     * convolveStringNTimes(0) --> "I was washing my watermellon"
-     * convolveStringNTimes(1) --> "I twoas twoashing my twoatermellon"
-     * convolveStringNTimes(2) --> "I ttwooas ttwooashing my ttwooatermellon"
+     * If sourceString is "I was washing my watermelon", find1 is "w" and replace1 is "two", then
+     * convolveStringNTimes(0) --> "I was washing my watermelon"
+     * convolveStringNTimes(1) --> "I twoas twoashing my twoatermelon"
+     * convolveStringNTimes(2) --> "I ttwooas ttwooashing my ttwooatermelon"
      *
      * Level 3: multi character --> multi characters
-     * If sourceString is "plant", replace1 is "an" and with1 is "handyman"
+     * If sourceString is "plant", find1 is "an" and replace1 is "handyman"
      * convolveStringNTimes(1) --> "plhandymant"
      * convolveStringNTimes(2) --> "plhhandymandymhandymant"
      * convolveStringNTimes(3) --> "plhhhandymandymhandymandymhhandymandymhandymant"
      *
      * Level 4: multiple replace-with pairs
-     * If sourceString is "happy", replace1 is "ha" and with1 is "sna", and replace2 is "py" and with2 is "per"
+     * Note: this will require creating new variables and modifiers.
+     * Don't do find1/replace1 if find1 is "". Don't do find2/replace2 if find2 is "".
+     * If sourceString is "happy", find1 is "ha" and replace1 is "sna", and find2 is "py" and replace2 is "per"
      * convolveStringNTimes(0) --> "happy"
      * convolveStringNTimes(1) --> "snapper"
      * @param N - the number of times you should loop through this string doing a replacement pass
-     * @return - a string generated from the source string with the replace-with cycle completed N times.
+     * @return - a string generated from the source string with the find-replace cycle completed N times.
      */
     public String convolveStringNTimes(int N)
     {
         StringBuilder builder = new StringBuilder(sourceString);
 
-        int replaceLength = replace1.length();
-        int withLength = with1.length();
+        int replaceLength = find1.length();
+        int withLength = replace1.length();
         for (int i=0; i<N; i++)
         {
             String tempSource = builder.toString();
@@ -61,14 +64,14 @@ public class StringConvolver
                 {
                     boolean matched = true;
                     for (int k=0; k<replaceLength; k++)
-                        if (tempSource.charAt(j+k) != replace1.charAt(k))
+                        if (tempSource.charAt(j+k) != find1.charAt(k))
                         {
                             matched = false;
                             break;
                         }
                     if (matched)
                     {
-                        builder.append(with1);
+                        builder.append(replace1);
                         j += (replaceLength - 1);
                     }
                     else

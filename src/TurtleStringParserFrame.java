@@ -170,8 +170,8 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         int N = (int) iterationSpinner.getValue();
 
         myConvolver.setSourceString(source);
-        myConvolver.setReplace1(stringToFind);
-        myConvolver.setWith1(stringToReplaceWith);
+        myConvolver.setFind1(stringToFind);
+        myConvolver.setFind1(stringToReplaceWith);
 
         String instructions = myConvolver.convolveStringNTimes(N);
 
