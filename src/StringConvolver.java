@@ -51,8 +51,9 @@ public class StringConvolver
     {
         StringBuilder builder = new StringBuilder(sourceString);
 
-        int replaceLength = find1.length();
-        int withLength = replace1.length();
+        int find1Length = 0;
+        if (find1 != null)
+            find1Length = find1.length();
         for (int i=0; i<N; i++)
         {
             String tempSource = builder.toString();
@@ -60,10 +61,10 @@ public class StringConvolver
             builder = new StringBuilder();
             for (int j=0; j<tempSourceLength; j++)
             {
-                if (j+replaceLength<tempSourceLength+1)
+                if (find1Length > 0 && j+find1Length<tempSourceLength+1)
                 {
                     boolean matched = true;
-                    for (int k=0; k<replaceLength; k++)
+                    for (int k=0; k<find1Length; k++)
                         if (tempSource.charAt(j+k) != find1.charAt(k))
                         {
                             matched = false;
@@ -72,7 +73,7 @@ public class StringConvolver
                     if (matched)
                     {
                         builder.append(replace1);
-                        j += (replaceLength - 1);
+                        j += (find1Length - 1);
                     }
                     else
                         builder.append(tempSource.charAt(j));
