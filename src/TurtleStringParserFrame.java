@@ -67,13 +67,13 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
         controlPanel.add(new JLabel("Distance"));
         controlPanel.add(distanceSlider);
         controlPanel.add(distanceLabel);
-        controlPanel.add(visibleTurtleToggle);
         JPanel colorPanel = new JPanel(new GridLayout(2,2));
         colorPanel.add(new JLabel("Line:",JLabel.RIGHT));
         colorPanel.add(lineColorChooserButton);
         colorPanel.add(new JLabel("Turtle:", JLabel.RIGHT));
         colorPanel.add(turtleColorChooserButton);
         controlPanel.add(colorPanel);
+        controlPanel.add(visibleTurtleToggle);
         return controlPanel;
     }
 
