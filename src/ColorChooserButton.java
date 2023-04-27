@@ -34,13 +34,14 @@ public class ColorChooserButton extends JButton implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         JColorChooser chooser = new JColorChooser(myColor);
-        int result = JOptionPane.showConfirmDialog(null, chooser);
-        if (JOptionPane.OK_OPTION == result)
+        int result = JOptionPane.showConfirmDialog(null, chooser); //open a dialog window with a color chooser in it,
+                                                                    // and wait for the user to click ok or cancel.
+        if (JOptionPane.OK_OPTION == result) // if they clicked "ok"
         {
             Color oldColor = myColor;
             myColor = chooser.getColor();
             repaint();
-            this.firePropertyChange("myColor",oldColor, myColor);
+            this.firePropertyChange("myColor",oldColor, myColor);// "fire" an event that will be picked up by the frame.
         }
     }
 
