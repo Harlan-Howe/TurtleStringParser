@@ -18,7 +18,8 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
 
     private JTextArea outputTextArea;
 
-    private JTextField sourceTF, find1TextField, replace1TextField;
+    private JTextField sourceTF;
+    private JTextField find1TextField, replace1TextField; // TODO (optional): make more.
     private JSpinner iterationSpinner;
     private JButton goButton;
 
@@ -52,7 +53,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
     public JPanel buildControlGUI()
     {
         JPanel controlPanel = new JPanel();
-        distanceSlider = new JSlider(JSlider.HORIZONTAL,0,150,30);
+        distanceSlider = new JSlider(JSlider.HORIZONTAL,1,100,30);
         distanceSlider.addChangeListener(this);
         distanceLabel = new JLabel("30 ");
         visibleTurtleToggle = new JCheckBox("Visible Turtle");
