@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class TurtleStringParserFrame extends JFrame implements ActionListener, ChangeListener, PropertyChangeListener
+public class TurtleStringConvolverFrame extends JFrame implements ActionListener, ChangeListener, PropertyChangeListener
 {
     private TurtlePanel turtle;
     private JSlider distanceSlider;
@@ -25,7 +25,7 @@ public class TurtleStringParserFrame extends JFrame implements ActionListener, C
 
     private StringConvolver myConvolver;
 
-    public TurtleStringParserFrame()
+    public TurtleStringConvolverFrame()
     {
         super("Turtles all the way down.");
         setSize(1000,800);
