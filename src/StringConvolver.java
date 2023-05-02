@@ -21,24 +21,24 @@ public class StringConvolver
      * replaces all occurrences of the "find1" string found in "sourceString" with "replace1" string. Do this N times.
      * NOTE: if find1 is an empty string, return the source string.
      *
-     * Level 1: one character --> one character
+     * Level 0: one character --> one character
      * For example, if sourceString is "bottom", find1 is "o" and replace1 is "i", then
      * convolveStringNTimes(0) --> "bottom"
      * convolveStringNTimes(1) --> "bittim"
      *
-     * Level 2: one character --> multi characters
+     * Level 1: one character --> multi characters
      * If sourceString is "I was washing my watermelon", find1 is "w" and replace1 is "two", then
      * convolveStringNTimes(0) --> "I was washing my watermelon"
      * convolveStringNTimes(1) --> "I twoas twoashing my twoatermelon"
      * convolveStringNTimes(2) --> "I ttwooas ttwooashing my ttwooatermelon"
      *
-     * Level 3: multi character --> multi characters
+     * Level 2: multi character --> multi characters
      * If sourceString is "plant", find1 is "an" and replace1 is "handyman"
      * convolveStringNTimes(1) --> "plhandymant"
      * convolveStringNTimes(2) --> "plhhandymandymhandymant"
      * convolveStringNTimes(3) --> "plhhhandymandymhandymandymhhandymandymhandymant"
      *
-     * Level 4: multiple replace-with pairs
+     * Level 3: multiple replace-with pairs
      * Note: this will require creating new variables and modifiers in this class and new GUI elements in the frame.
      * Don't do find1/replace1 if find1 is "". Don't do find2/replace2 if find2 is "".
      * If sourceString is "happy", find1 is "ha" and replace1 is "sna", and find2 is "py" and replace2 is "per"
