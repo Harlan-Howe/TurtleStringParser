@@ -44,6 +44,10 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setVisible(true);
+
+        sourceTF.setSelectionStart(0);
+        sourceTF.selectAll();
+        sourceTF.requestFocus();
     }
 
     /**
@@ -108,6 +112,7 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
         sourceTF.setText("Lffff RFFRFRFRFLLfRFLf LFFRFRFRFLfLff fRRFRFFRFf fLLFLFLFRFRF");
         sourceTF.setToolTipText("Enter the text that will be used as the basis of the turtle's instructions.");
         sourceTF.setBorder(new TitledBorder("Source string"));
+
 
         Box verticalStack = Box.createVerticalBox();
         verticalStack.add(sourceTF);
