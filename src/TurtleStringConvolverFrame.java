@@ -94,6 +94,7 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
         outputTextArea = new JTextArea("Nothing yet",4,60);
         outputTextArea.setLineWrap(true);
         outputTextArea.setEnabled(true);
+        outputTextArea.setFocusable( false );
         JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
         outputPanel.add(outputScrollPane);
         outputPanel.setPreferredSize(new Dimension(-1, 75));
