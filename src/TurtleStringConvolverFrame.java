@@ -3,6 +3,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -17,6 +18,7 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
     private ColorChooserButton lineColorChooserButton, turtleColorChooserButton;
 
     private JTextArea outputTextArea;
+    private JButton copyButton;
 
     private JTextField sourceTF;
     private JTextField find1TextField, replace1TextField; // TODO (for optional multi-search): make more.
@@ -93,10 +95,14 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
         JPanel outputPanel = new JPanel();
         outputTextArea = new JTextArea("Nothing yet",4,60);
         outputTextArea.setLineWrap(true);
-        outputTextArea.setEnabled(true);
+        outputTextArea.setEnabled(false);
         outputTextArea.setFocusable( false );
+        copyButton = new JButton("Copy to Clipboard");
+        copyButton.addActionListener(this);
+
         JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
         outputPanel.add(outputScrollPane);
+        outputPanel.add(copyButton);
         outputPanel.setPreferredSize(new Dimension(-1, 75));
         return outputPanel;
     }
@@ -169,6 +175,10 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
         {
             turtle.setTurtleIsVisible(visibleTurtleToggle.isSelected());
         }
+        if (actEvt.getSource() == copyButton)
+        {
+            copyOutputToClipboard();
+        }
     }
 
     /**
@@ -193,6 +203,17 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
 
         turtle.setInstructions(instructions);
         outputTextArea.setText(instructions);
+    }
+
+    /**
+     * copies whatever text is in the outputText area into the computer's clipboard, presumably as a response to the
+     * user clicking on the "copy to clipboard" button. (See actionPerformed() definition.)
+     * This is rather esoteric. APCS -> you don't need to understand this one! (I just thought the functionality would
+     * be nice.)
+     */
+    public void copyOutputToClipboard()
+    {
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(outputTextArea.getText()),null);
     }
 
     @Override
