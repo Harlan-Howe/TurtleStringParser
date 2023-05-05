@@ -100,7 +100,9 @@ public class TurtleStringConvolverFrame extends JFrame implements ActionListener
         copyButton = new JButton("Copy to Clipboard");
         copyButton.addActionListener(this);
 
-        JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
+        JScrollPane outputScrollPane = new JScrollPane(outputTextArea,
+                                                        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                                        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         outputPanel.add(outputScrollPane);
         outputPanel.add(copyButton);
         outputPanel.setPreferredSize(new Dimension(-1, 75));
