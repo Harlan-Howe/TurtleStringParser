@@ -37,6 +37,12 @@ public class StringConvolver
      * convolveStringNTimes(1) --> "plhandymant"
      * convolveStringNTimes(2) --> "plhhandymandymhandymant"
      * convolveStringNTimes(3) --> "plhhhandymandymhandymandymhhandymandymhandymant"
+     * Clarification: Once you have found a match you should continue search _after_ the found section of the source
+     * string, not within the selection.
+     * If sourceString is "aaaa", find1 is "aa" and replace1 is "b"
+     * convolveStringNTimes(1) --> "bb" Note: NOT "bbb".
+     * (Although there is an "aa" at positions 1&2, after the first "aa" at position 0&1 is found, the search continues
+     * starting at position 2.)
      *
      * Level 3: multiple replace-with pairs
      * Note: this will require creating new variables and modifiers in this class and new GUI elements in the frame.
