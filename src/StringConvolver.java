@@ -1,3 +1,6 @@
+/**
+ * String Convolver
+ */
 public class StringConvolver
 {
     private String sourceString, find1, replace1;
